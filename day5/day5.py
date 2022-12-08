@@ -13,11 +13,15 @@ for x in f:
         readData =readData + 1
     else:
         break
-
 data_t = [list(x) for x in zip(*data)]
-print(data_t)
+data_t[0].remove(' ')
+print(data_t[0])
+
+list1 = [ele for ele in data_t[0] if ele not in {' '}]
+list1.reverse()
+print(list1.pop())
 
 for x in f:
     numbers = re.findall(r'\d+',x)
-    print(numbers)
+    #print(numbers)
 f.close()

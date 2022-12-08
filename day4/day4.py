@@ -1,6 +1,4 @@
-
 import re
-
 f = open("input.txt", "r")
 sets = 0 
 for x in f:
@@ -11,7 +9,5 @@ for x in f:
     #    sets = sets +1
     if any(first_set.intersection(second_set)):
         sets = sets +1
-
 print(sets)
-
 f.close()
