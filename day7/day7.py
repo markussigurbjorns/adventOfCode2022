@@ -3,12 +3,10 @@ class Tree:
         self.parent = parent
         self.children = dict()
         self.name = name
+        self.files = dict()
         self.size=0
     def setSize(self, int):
         self.size = self.size+int
-
-
-
 
 f = open("input.txt", "r")
 
@@ -22,26 +20,24 @@ for x in f:
             elif xx[2] == "..": tree = tree.parent
             else: tree = tree.children[xx[2]]
     elif xx[0] == "dir": tree.children[xx[1]] = (Tree(xx[1], tree))
-    else: tree.setSize(int(xx[0]))
+    else: tree.files[xx[1]] = int(xx[0])
 f.close()
 
+print(root.files)
+# def flatten(Tree:Tree):
+#     output = dict()
+#     for k, v in Tree.children.items():
+#         if v.size <=100000 : output[k] = v.size
+#         if isinstance(v.children, dict):
+#             output.update(flatten(v))
+#         else:
+#             print('fs')
+#             output[k] = v
 
+#     return output
 
-def flatten(Tree:Tree):
-    output = dict()
-    for k, v in Tree.children.items():
-        if v.size <=100000 : output[k] = v.size
-        if isinstance(v.children, dict):
-            output.update(flatten(v))
-        else:
-            print('fs')
-            output[k] = v
+# resulting_dict = flatten(root)
+# sum = 0
+# for k, v in resulting_dict.items():
+#     sum = sum + int(v)
 
-    return output
-
-resulting_dict = flatten(root)
-sum = 0
-for k, v in resulting_dict.items():
-    sum = sum + int(v)
-
-print(sum)
