@@ -8,7 +8,7 @@ class Tree:
     def setSize(self, int):
         self.size = self.size+int
 
-f = open("input.txt", "r")
+f = open("/home/markussigurbjornsson/Documents/adventOfCode2022/day7/input.txt", "r")
 
 root = Tree("/", None)
 tree = root
@@ -23,21 +23,28 @@ for x in f:
     else: tree.files[xx[1]] = int(xx[0])
 f.close()
 
-print(root.files)
-# def flatten(Tree:Tree):
-#     output = dict()
-#     for k, v in Tree.children.items():
-#         if v.size <=100000 : output[k] = v.size
-#         if isinstance(v.children, dict):
-#             output.update(flatten(v))
-#         else:
-#             print('fs')
-#             output[k] = v
+def set_size(Tree:Tree):
+    size = 0
+    for k, v in Tree.children.items():
+        if isinstance(v.children, dict):
+            size = size + set_size(v)
+        else:
+            pass
+    for l, n in Tree.files.items():
+        size = size + int(n)
+    Tree.size=size
+    return size
 
-#     return output
+def flatten(Tree:Tree):
+    d = dict()
+    for k, v in Tree.children.items():
+        if tree.size <= 100000: print(Tree.size)
+        if isinstance(v.children, dict):
+            d.update(flatten(v))
+    return d 
 
-# resulting_dict = flatten(root)
-# sum = 0
-# for k, v in resulting_dict.items():
-#     sum = sum + int(v)
 
+print(root.size)
+c = set_size(root)
+print(root.size)
+flatten(root)
